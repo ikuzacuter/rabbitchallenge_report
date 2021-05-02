@@ -1,0 +1,82 @@
+\documentclass[b5paper,12pt]{jarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+
+
+\begin{document}
+\section{確率}
+
+\subsection{条件付き確率}
+ある事象$X=x$が与えられた下で，$Y=y$となる確率のこと。
+\[
+    P(Y=y|X=x)=\frac{P(Y=y,X=x)}{P(X=x)}
+\]
+\subsection{ベイズの定理}
+ある事象$X=x$，$Y=y$に対して、以下が成り立つ。
+\[
+    P(X=x|Y=y)=\frac{P(X=x)P(Y=y|X=x)}{P(Y=y)}
+\]
+\subsection{期待値、分散、標準偏差}
+\subsubsection{期待値}
+確率変数$f$の期待値$\text{E}(f)$は以下のように表される。
+\[
+    E(f)=\int P(X=x)f(X=x)dx
+\]
+離散系の場合は
+\[
+    E(f)=\sum_{i=1}^n P(X=x_i)f(X=x_i)
+\]
+\subsubsection{分散}
+確率変数$f$の分散$\text{Var}(f)$は以下のように表される。ただし、$\mu$は$f$の期待値とする。
+\[
+    \text{Var}(f)=\text{E}((f-\mu)^2)
+\]
+また、以下のようにも表すことができる。
+\[
+    \text{Var}(f)=\text{E}(f^2)-\mu^2
+\]
+
+また、$f$と確率変数$g$との共分散$\text{Cov}(f,g)$は以下のように表される。ただし、$\nu$は$g$の期待値とする。
+\[
+    \text{Cov}(f,g)=\text{E}((f-\mu)(g-\nu))
+\]
+\[
+    \text{Cov}(f,g)=\text{E}(fg)-\mu\nu
+\]
+
+\subsubsection{標準偏差}
+確率変数$f$の分散を$\text{Var}(f)$とするとき、標準偏差$\sigma$は以下のように表される。
+\[
+    \sigma=\sqrt{\text{Var}(f)}
+\]
+
+\subsection{確率分布}
+\subsubsection{ベルヌーイ分布}
+ベルヌーイ分布は以下のように表される。
+\[
+    P(X=k|p)=p^k(1-p)^k ~~~(k=0,1)
+\]
+\subsubsection{二項分布}
+ベルヌーイ分布を多試行に拡張したもの。試行回数を$n$とすると、以下のように表される。
+\[
+    P(X=k|p,n)=\left(
+        \begin{array}{c}
+            n \\
+            k 
+        \end{array}
+        \right)p^k(1-p)^{n-k} ~~~(k=0,1,\ldots,n)
+\]
+\subsubsection{カテゴリカル分布}
+ベルヌーイ分布を多値に拡張したもの。取りうる値が$M$つあるとすると、以下のように表される。
+\[
+    P(X=\vec{k}|\vec{p})=\prod_{M=1}^M p_m^{k_m}
+\]
+
+\subsubsection{ガウス分布}
+平均$\mu$,標準偏差$\sigma$の正規分布。以下のように表される。
+\[
+    N(x;\mu,\sigma^2)=\sqrt{\frac{1}{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+
+\end{document}
