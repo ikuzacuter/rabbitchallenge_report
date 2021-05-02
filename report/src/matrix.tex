@@ -1,0 +1,205 @@
+\documentclass[b5paper,12pt]{jarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+
+
+\begin{document}
+\section{行列}
+行列の定義、行列式については割愛。掃き出し法と固有値、特異値分解について要約する。
+\subsection{掃き出し法}
+逆行列を求める手法の1つ。
+逆行列を求めるのにどのような行基本変形をしたのかを記録し掛け算していく。
+
+以下に行列
+$A = \left(
+    \begin{array}{cc}
+        1 & 4 \\
+        2 & 3 
+    \end{array}
+\right)$の逆行列を求める例を示す。
+
+\[
+    \left(
+        \begin{array}{cc|cc}
+            1 & 4 & 1 & 0 \\
+            2 & 3 & 0 & 1 
+        \end{array}        
+    \right)
+\]
+
+\[
+    \left(
+        \begin{array}{cc|cc}
+            -5/3 & 0 & 1 & -4/3 \\
+            2 & 3 & 0 & 1 
+        \end{array}        
+    \right)
+\]
+
+\[
+    \left(
+        \begin{array}{cc|cc}
+            -5/3 & 0 & 1 & -4/3 \\
+            0 & 3 & 6/5 & -3/5 
+        \end{array}        
+    \right)
+\]
+
+\[
+    \left(
+        \begin{array}{cc|cc}
+            1 & 0 & -3/5 & 4/5 \\
+            0 & 1 & 2/5 & -1/5 
+        \end{array}        
+    \right)
+\]
+
+\[
+    A^{-1} =
+    \left(
+        \begin{array}{cc}
+            -3/5 & 4/5 \\
+            2/5 & -1/5 
+        \end{array}        
+    \right)
+\]
+
+\subsection{固有値}
+$A\vec{x}=\lambda\vec{x}$を満たす$\lambda$を行列の固有値、$\vec{x}$を固有ベクトルという。
+以下に行列
+$A = \left(
+    \begin{array}{cc}
+        1 & 4 \\
+        2 & 3 
+    \end{array}
+\right)$の固有値、固有ベクトルを求める例を示す。
+
+\[
+    A\vec{x}=\lambda\vec{x}
+\]
+\[
+    (A-\lambda I)\vec{x}=0
+\]
+\[
+    \vec{x}\neq0より
+\]
+\[
+    |A-\lambda I|=0
+\]
+\[
+    \left|
+    \begin{array}{cc}
+        1-\lambda & 4 \\
+        2 & 3-\lambda 
+    \end{array}
+    \right|=0
+\]
+\[
+    (1-\lambda)(3-\lambda)-4\cdot2=0
+\]
+\[
+    \lambda^2-4\lambda-5=0
+\]
+\[
+    \lambda=5,-1
+\]
+$\lambda=5のとき、$
+\[
+    \left(
+    \begin{array}{cc}
+        -4 & 4 \\
+        2 & -2 
+    \end{array}
+    \right) 
+    \left(
+        \begin{array}{c}
+            x_1 \\
+            x_2 
+        \end{array}
+    \right) 
+    =0
+\]
+\[
+    x_1=x_2より
+\]
+\[
+    \vec{x}=t
+    \left(
+        \begin{array}{c}
+            1 \\
+            1 
+        \end{array}
+    \right)
+    ~(tは任意の定数)
+\]
+$\lambda=-1のとき、$
+\[
+    \left(
+    \begin{array}{cc}
+        2 & 4 \\
+        2 & 4 
+    \end{array}
+    \right) 
+    \left(
+        \begin{array}{c}
+            x_1 \\
+            x_2 
+        \end{array}
+    \right) 
+    =0
+\]
+\[
+    x_1=-2x_2より
+\]
+\[
+    \vec{x}=t
+    \left(
+        \begin{array}{c}
+            2 \\
+            -1 
+        \end{array}
+    \right)
+    ~(tは任意の定数)
+\]
+\subsection{固有値分解}
+行列$A$が固有値$\lambda_1,\lambda_2,\ldots$と
+固有ベクトル$\vec{x_1},\vec{x_2},\ldots$を持つとき、行列$A$は以下のように分解できる。
+\[
+    A=V\Lambda V^{-1}
+\]
+ただし、$V=\left(
+    \begin{array}{ccc}
+        \vec{x_1} & \vec{x_2} & \cdots
+    \end{array}
+\right)
+$, $\Lambda=\left(
+    \begin{array}{ccc} 
+        \vec{\lambda_1} & 0 & \cdots \\
+        0 & \vec{\lambda_2} & \cdots \\
+        \cdots & \cdots & \cdots 
+    \end{array}
+\right)$である。
+
+\subsection{特異値分解}
+固有値分解を非正方行列に拡張したもの。
+ある行列$A$を以下のように分解できる。
+\[
+    A=U\Sigma V^T
+\]
+ただし、$U,V$は
+\[
+    A\vec{v}=\sigma \vec{u}
+\]
+\[
+    A^T\vec{u}=\sigma \vec{v}
+\]
+を満たす単位ベクトルからなる行列である。
+このとき、$\sigma$を特異値、$\vec{u},\vec{v}$をそれぞれ左特異ベクトル、右特異ベクトルと呼ぶ。
+
+$AA^T$の固有値は$A$の特異値の2乗、固有ベクトル（長さ1）は左特異ベクトルとなり、
+$A^TA$の固有ベクトル（長さ1）は右特異ベクトルとなる。
+
+特異値分解は主に次元削減に用いられる。
+
+\end{document}
