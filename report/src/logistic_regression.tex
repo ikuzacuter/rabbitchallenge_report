@@ -1,0 +1,71 @@
+\documentclass[b5paper,12pt]{jarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+
+
+\begin{document}
+\section{ロジスティック回帰}
+
+\subsection{分類問題}
+ある入力（数値）からクラスに分類する問題。
+
+\subsection{ロジスティック線形回帰モデル}
+分類問題を解くための教師あり機械学習モデル
+線形回帰モデルの出力をシグモイド関数に入力し、$y=1$となる確率を出力する。
+
+\[
+  P(Y = 1|\boldsymbol{x}) = \sigma(w_0 + \sum_{j_1}^{m}w_j x_j)
+\]
+
+\subsection{シグモイド関数}
+入力は実数、出力は0~1の単調増加関数。
+\[
+  \sigma (x) = \frac{1}{1+\exp (-ax)}
+\]
+
+DNNでの活性化関数としてもよく用いられる。
+
+
+\subsection{最尤推定}
+ロジスティック回帰モデルでの最尤推定ではベルヌーイ分布を仮定する。
+\[
+  P(y) = p^y (1-p)^y
+\]
+
+\subsection{尤度関数}
+データがある分布に従っていると仮定したとき、そのデータを生成したであろう分布の尤もらしさを表す関数。
+\begin{align*}
+  P(y_1, y_2, \cdots, y_n| w_0, w_1, \cdots, w_n) &= \prod_{i=1}^{n} p_i^{y_i} (1-p_i)^{1-y_i} \\
+  &= \prod_{i=1}^{n} {\sigma (\boldsymbol{w}^T \boldsymbol{x}_i)}^{y_i} 
+  (1-{\sigma (\boldsymbol{w}^T \boldsymbol{x}_i)})^{1-y_i} \\
+  &= L(\boldsymbol{w})
+\end{align*}
+推定の際は総和で計算できるよう対数をとり、マイナスをかけた対数尤度関数$-\log L(\boldsymbol{w})$を最小化する。
+
+\subsection{勾配降下法（SG）}
+反復学習によりパラメータを逐次的に更新することで、対数尤度関数の最小化を行う。
+
+パラメータが更新されなくなった場合、勾配が0になっているので、探索範囲内では最適な解が求められたことになる（ローカルミニマム）。
+\subsection{確率的勾配降下法（SGD）}
+データを一つずつランダムに選んでパラメータを更新する。
+
+\subsection{分類の評価方法}
+混同行列を使用して評価指標を計算する。
+
+\subsubsection{再現率（Recall）}
+検出に抜け漏れを少なくしたい場合に採用する。
+\[
+  \frac{TP}{TP+FN}
+\]
+
+\subsubsection{適合率（Precision）}
+見逃しが多くても正確に検出したい場合に採用する。
+\[
+  \frac{TP}{TP+FP}
+\]
+
+\subsubsection{F値}
+RecallとPrecisionの調和平均
+
+\end{document}
